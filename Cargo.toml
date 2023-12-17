@@ -1,5 +1,5 @@
 [workspace]
 
 members = [
-    'practice_A',
+    'practice_a',
 ]
