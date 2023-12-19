@@ -15,5 +15,9 @@ name = "abc086_a"
 version = "0.1.0"
 
 [[package]]
+name = "abc087_b"
+version = "0.1.0"
+
+[[package]]
 name = "practice_a"
 version = "0.1.0"
