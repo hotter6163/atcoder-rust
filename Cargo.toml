@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
+    'abc049_c',
     'abc081_a',
     'abc081_b',
     'abc083_b',
