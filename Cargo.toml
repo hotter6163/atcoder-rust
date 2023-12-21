@@ -3,8 +3,9 @@
 members = [
     'abc081_a',
     'abc081_b',
-    'abc087_b',
     'abc083_b',
     'abc086_a',
+    'abc087_b',
+    'abc088_b',
     'practice_a',
 ]
