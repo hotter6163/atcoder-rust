@@ -1,15 +1,15 @@
 [workspace]
 
 members = [
-    'abc049_c',
-    'abc081_a',
-    'abc081_b',
-    'abc083_b',
-    'abc085_b',
-    'abc085_c',
-    'abc086_a',
-    'abc086_c',
-    'abc087_b',
-    'abc088_b',
-    'practice_a',
+    'beginners/abc049_c',
+    'beginners/abc081_a',
+    'beginners/abc081_b',
+    'beginners/abc083_b',
+    'beginners/abc085_b',
+    'beginners/abc085_c',
+    'beginners/abc086_a',
+    'beginners/abc086_c',
+    'beginners/abc087_b',
+    'beginners/abc088_b',
+    'beginners/practice_a',
 ]
