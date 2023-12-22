@@ -12,4 +12,6 @@ members = [
     'beginners/abc087_b',
     'beginners/abc088_b',
     'beginners/practice_a',
+
+    'libs/read',
 ]
