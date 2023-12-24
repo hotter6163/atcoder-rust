@@ -1,9 +1,10 @@
-use read;
+extern crate read;
+
+use read::read_tuple;
 
 fn main() {
-    let numbers = read::read_numbers::<usize>(2).unwrap();
-    let m = numbers[1];
-    let schedule = read::read_string().unwrap();
+    let (_, m) = read_tuple!(usize, usize);
+    let schedule = read::read_line(|s| Ok(s.to_string())).unwrap();
 
     let required = schedule
         .chars()

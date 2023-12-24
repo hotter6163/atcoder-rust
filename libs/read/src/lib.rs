@@ -1,40 +1,26 @@
-type ReadResult<T> = std::result::Result<T, Box<dyn std::error::Error>>;
+mod read_tuple;
 
-pub fn read_line<T, F>(formatter: F) -> ReadResult<T>
+use std::error::Error;
+use std::io;
+
+pub fn read_line<T, F>(parser: F) -> Result<T, Box<dyn Error>>
 where
-    F: FnOnce(&str) -> T,
+    F: Fn(&str) -> Result<T, std::io::Error>,
 {
-    let mut s = String::new();
-    std::io::stdin().read_line(&mut s)?;
-    Ok(formatter(s.trim()))
+    let mut line = String::new();
+    io::stdin().read_line(&mut line)?;
+    let result = parser(&line)?;
+    Ok(result)
 }
 
-pub fn read_lines<T, F>(n: usize, mut formatter: F) -> ReadResult<Vec<T>>
+pub fn read_lines<T, F>(n: i32, parser: F) -> Result<Vec<T>, Box<dyn Error>>
 where
-    F: FnMut(&str) -> T,
+    F: Fn(&str) -> Result<T, std::io::Error>,
 {
-    (0..n).map(|_| read_line(&mut formatter)).collect()
-}
-
-pub fn read_string() -> ReadResult<String> {
-    read_line(|s| s.to_string())
-}
-
-pub fn read_numbers<T: std::str::FromStr>(n: usize) -> ReadResult<Vec<T>>
-where
-    <T as std::str::FromStr>::Err: std::fmt::Debug,
-{
-    read_line(|s| {
-        s.split_whitespace()
-            .map(|e| e.parse::<T>().unwrap())
-            .take(n)
-            .collect()
-    })
-}
-
-pub fn read_number<T: std::str::FromStr>() -> ReadResult<T>
-where
-    <T as std::str::FromStr>::Err: std::fmt::Debug,
-{
-    read_numbers(1).map(|mut v| v.pop().unwrap())
+    let mut lines = Vec::new();
+    for _ in 0..n {
+        let line = read_line(&parser)?;
+        lines.push(line);
+    }
+    Ok(lines)
 }
