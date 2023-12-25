@@ -4,7 +4,7 @@ use read::read_tuple;
 
 fn main() {
     let (_, m) = read_tuple!(usize, usize);
-    let schedule = read::read_line(|s| Ok(s.to_string())).unwrap();
+    let schedule = read::read_string().unwrap();
 
     let required = schedule
         .chars()

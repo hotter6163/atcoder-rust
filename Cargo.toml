@@ -16,4 +16,5 @@ members = [
     'libs/read',
 
     'practice/abc332_c',
+    'practice/abc334_d',
 ]

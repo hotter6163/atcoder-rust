@@ -2,25 +2,33 @@ mod read_tuple;
 
 use std::error::Error;
 use std::io;
+use std::str::FromStr;
 
-pub fn read_line<T, F>(parser: F) -> Result<T, Box<dyn Error>>
+type ReadResult<T> = Result<T, Box<dyn Error + 'static>>;
+
+pub fn read_number<T: FromStr>() -> ReadResult<T>
 where
-    F: Fn(&str) -> Result<T, std::io::Error>,
+    <T as FromStr>::Err: Error + 'static,
 {
     let mut line = String::new();
     io::stdin().read_line(&mut line)?;
-    let result = parser(&line)?;
-    Ok(result)
+    line.trim().parse::<T>().map_err(|e| e.into())
 }
 
-pub fn read_lines<T, F>(n: i32, parser: F) -> Result<Vec<T>, Box<dyn Error>>
+pub fn read_numbers<T: FromStr>() -> ReadResult<Vec<T>>
 where
-    F: Fn(&str) -> Result<T, std::io::Error>,
+    <T as FromStr>::Err: Error + 'static,
 {
-    let mut lines = Vec::new();
-    for _ in 0..n {
-        let line = read_line(&parser)?;
-        lines.push(line);
-    }
-    Ok(lines)
+    let mut line = String::new();
+    io::stdin().read_line(&mut line)?;
+    line.trim()
+        .split_whitespace()
+        .map(|s| s.parse::<T>().map_err(|e| e.into()))
+        .collect()
+}
+
+pub fn read_string() -> ReadResult<String> {
+    let mut line = String::new();
+    io::stdin().read_line(&mut line)?;
+    Ok(line.trim().to_string())
 }
